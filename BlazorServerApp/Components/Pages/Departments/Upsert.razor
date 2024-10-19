@@ -1,0 +1,58 @@
+﻿@page "/Departments/Upsert/{Id:int?}"
+@inject DepartmentValidator departmentvalidator
+@if (NotFoundError)
+{
+    <div class="alert alert-danger">
+        Department not found.
+    </div>
+}
+else
+{
+    <div class="card shadow border-0 mt-4">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">@((Id is null ? "Create" : "Update") + " Department")</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <EditForm Model="@departmant" OnValidSubmit="HandleValidSubmit">
+                <div class="alert-danger">
+                    <FluentValidationValidator />
+                    <ValidationSummary />
+                </div>
+
+                <div class="mb-3">
+                    <label for="name">Name:</label>
+                    <InputText id="name" class="form-control" @bind-Value="departmant.Name" />
+                    <div class="alert-danger">
+                        <ValidationMessage For="@(() => departmant.Name)" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6 col-md-3">
+                        @if (Id is null)
+                        {
+                            <button type="submit" class="form-control btn btn-primary">Submit</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="form-control btn btn-primary">Update</button>
+                        }
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <NavLink class="btn btn-outline-secondary border" href="/Departments/Index" style="width:150px">Back To List</NavLink>
+                    </div>
+                </div>
+
+
+            </EditForm>
+        </div>
+    </div>
+
+}
+
+
+

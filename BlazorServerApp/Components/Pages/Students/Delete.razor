@@ -1,0 +1,57 @@
+﻿@page "/Students/Delete/{Id:int}"
+@namespace BlazorServerApp
+<EditForm Model="@Student" OnValidSubmit="@HandleValidSubmit">
+
+    <div class="card shadow border-0 mt-4">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">Delete Student</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <div class="border p-3 mt-4">
+
+                <div class="mb-3 row p-1">
+                    <label for="Name" class="control-label">Name</label>
+                    <InputText id="Name" @bind-Value="Student.Name" class="form-control" />
+                </div>
+
+                <div class="mb-3 row p-1">
+                    <label for="Age" class="control-label">Age</label>
+                    <InputNumber id="Age" @bind-Value="Student.Age" class="form-control" />
+                </div>
+
+                <div class="mb-3 row p-1">
+                    <label for="Email" class="control-label">Email</label>
+                    <InputText id="Email" @bind-Value="Student.Email" class="form-control" />
+                </div>
+                @if(Student.departmant is null)
+                {
+                    <div class="mb-3 row p-1">
+                        <label for="Dept_Id" class="control-label">Department</label>
+                        <div class="alert alert-warning">No Department for this Student</div>
+                    </div>
+                }
+                else
+                {
+                <div class="mb-3 row p-1">
+                    <label for="Dept_Id" class="control-label">@Student.departmant.Name</label>
+                    <InputNumber id="Email" @bind-Value="Student.dept_Id" class="form-control" />
+                </div>
+                }
+
+                <div class="row">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="form-control btn btn-primary">Delete</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <NavLink class="btn btn-outline-secondary border" href="/Students/Index" style="width:150px">Back To List</NavLink>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+

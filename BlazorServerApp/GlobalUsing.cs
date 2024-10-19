@@ -1,0 +1,12 @@
+﻿global using Microsoft.EntityFrameworkCore;
+global using BlazorServerApp.Components;
+global using BlazorServerApp.Data;
+global using System.ComponentModel.DataAnnotations;
+global using System.ComponentModel.DataAnnotations.Schema;
+global using BlazorServerApp.Models;
+global using Microsoft.AspNetCore.Components;
+global using Microsoft.AspNetCore.Mvc;
+global using BlazorServerApp.Repositories;
+global using BlazorServerApp.UnitOFwork;
+global using BlazorServerApp.Validations;
+global using FluentValidation;

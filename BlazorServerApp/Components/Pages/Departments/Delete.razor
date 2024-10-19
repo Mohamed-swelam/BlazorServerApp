@@ -1,0 +1,31 @@
+﻿@page "/Departments/Delete/{Id:int}"
+<EditForm Model="@departmant" OnValidSubmit="@HandleValidSubmit">
+
+    <div class="card shadow border-0 mt-4">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">Delete Department</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <div class="border p-3 mt-4">
+
+                <div class="mb-3 row p-1">
+                    <label for="Name" class="control-label">Name</label>
+                    <InputText id="Name" @bind-Value="departmant.Name" class="form-control" />
+                </div>
+                <div class="row">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="form-control btn btn-primary">Delete</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <NavLink class="btn btn-outline-secondary border" href="/Departments/Index" style="width:150px">Back To List</NavLink>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+

@@ -1,0 +1,70 @@
+﻿@page "/Students/Index"
+@namespace BlazorServerApp
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Student List</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3 ">
+            <partial name="_Notification" />
+            <div class="col-12 text-end">
+                <a href="/Students/Upsert" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Add New Student
+                </a>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Department</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in students??new())
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Email</td>
+                        <td>@item.Age</td>
+                        @if(item.departmant is null)
+                        {
+                            <td>No Department</td>
+                        }
+                        else
+                        {
+                            <td>@item.departmant.Name</td>
+                        }
+                       
+                        <td>
+                            <div class="w-30 btn-group" role="group">
+                                <a href="/Students/Upsert/@item.Id" class="btn btn-primary mx-2">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                            </div>
+                            <div class="w-30 btn-group" role="group">
+                                <a href="/Students/Delete/@item.Id" class="btn btn-danger mx-2">
+                                    <i class="bi bi-trash-fill"></i> Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+

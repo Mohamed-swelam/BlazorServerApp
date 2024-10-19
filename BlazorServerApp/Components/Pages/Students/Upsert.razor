@@ -1,0 +1,87 @@
+﻿@page "/Students/Upsert/{Id:int?}"
+@inject StudentValidator studentvalidator
+@namespace BlazorServerApp
+@if (NotFoundError)
+{
+    <div class="alert alert-danger">
+        Student not found.
+    </div>
+}
+else
+{
+    <div class="card shadow border-0 mt-4">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">@((Id is null ? "Create" : "Update") + " Student")</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+        <EditForm Model="@Student" OnValidSubmit="HandleValidSubmit">
+            <div class="alert-danger">
+                <FluentValidationValidator />
+                <ValidationSummary />
+            </div>
+
+            <div class="mb-3">
+                <label for="name">Name:</label>
+                <InputText id="name" class="form-control" @bind-Value="Student.Name" />
+                <div class="alert-danger">
+                <ValidationMessage For="@(() => Student.Name)" />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email">Email:</label>
+                <InputText id="email" class="form-control" @bind-Value="Student.Email" />
+                <div class="alert-danger">
+                      <ValidationMessage For="@(() => Student.Email)" />
+                </div>          
+            </div>
+
+            <div class="mb-3">
+                <label for="age">Age:</label>
+                <InputNumber id="age" class="form-control" @bind-Value="Student.Age" />
+                 <div class="alert-danger">
+                      <ValidationMessage For="@(() => Student.Age)" />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="department">Department:</label>
+                <InputSelect id="department" class="form-control" @bind-Value="Student.dept_Id">
+                        <option disabled selected >--- Select a Department --- </option>
+                    @foreach (var department in departments)
+                    {
+                        <option value="@department.Id">@department.Name</option>
+                    }
+                </InputSelect>
+                <div class="alert-danger">
+                      <ValidationMessage For="@(() => Student.dept_Id)" />
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col-6 col-md-3">
+                        @if (Id is null)
+                        {
+                            <button type="submit" class="form-control btn btn-primary">Submit</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="form-control btn btn-primary">Update</button>
+                        }
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <NavLink class="btn btn-outline-secondary border" href="/Students/Index" style="width:150px">Back To List</NavLink>
+                    </div>
+            </div>
+           
+               
+        </EditForm>
+        </div>
+    </div>
+
+}
+
+
+
