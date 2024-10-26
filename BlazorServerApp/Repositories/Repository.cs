@@ -71,6 +71,17 @@ public class Repository<T> : IRepository<T> where T : class
             _context.ChangeTracker.Clear();
         }
     }
+    public async Task DeleteRange(List<T> values)
+    {
+
+        if (values is not null)
+        {
+            _dbSet.RemoveRange(values);
+
+            await _context.SaveChangesAsync();
+            _context.ChangeTracker.Clear();
+        }
+    }
 
     public async Task<T?> GetById(int? id)
     {
